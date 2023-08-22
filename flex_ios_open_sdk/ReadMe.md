@@ -16,15 +16,15 @@
 
 ##### 2、将 SDK Demo 目录下的模型文件sleep_m_0310.b、sleep_m_0310.p 手动拖入工程，并且拖入到 build phases--copy bundle resource 下。
 
-![image-20230822213612320](/Users/eric/Library/Application Support/typora-user-images/image-20230822213612320.png)
+![](https://p.ipic.vip/7pdvyf.jpg)
 
 ##### 拷贝 flexPaster 目录到您的工程里，这是 SDK 运行需要用到的一些头文件和三方库 RNCryptor、AFNetworking（如果您的项目中已经使用到 AFNetworking，则可以不需要重复添加）。
 
-![image-20230822230821353](/Users/eric/Library/Application Support/typora-user-images/image-20230822230821353.png)
+![image-20230822230821353](https://p.ipic.vip/f867tu.jpg)
 
 ##### 3、导入 系统蓝牙框架 CoreBluetooth
 
-![image-20230822213653314](/Users/eric/Library/Application Support/typora-user-images/image-20230822213653314.png)
+![image-20230822213653314](https://p.ipic.vip/lk1vgx.jpg)
 
 ##### 4、请任意修改一处文件名后缀为 .mm ，以便能运行 SDK 里面的 c++ 代码
 
