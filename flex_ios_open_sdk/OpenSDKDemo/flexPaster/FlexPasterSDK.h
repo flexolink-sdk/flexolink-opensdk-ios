@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype) sharedInstance;
 
-
 ///开始扫描
 - (void) startScan:(id<ScanPasterDelegate>) scanPasterDelegate;
 ///停止扫描
@@ -60,14 +59,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///信号质量
 - (BOOL) signalQualityWithData:(NSMutableArray<NSNumber *> *) data dataLen:(NSUInteger) dataLen;
 ///分期状态
-- (void) onlineStage:(id<OnlineStageDelegate>) onlineStageDelegate;
+- (void) onlineStage:(id<OnlineStageDelegate>) onlineStageDelegate binPath:(NSString *) binPath paramPath:(NSString *) paramPath;
 ///设备信息
 - (DeviceTypeModel *) deviceInfo;
-
-/// sdk 初始化
-- (void) initSDKWithAppKey:(NSString *) appkey appSecret:(NSString *) appSecret;
-
-- (void) initSDK;
 
 /// sdk 授权
 - (void) authorityWithAppKey:(NSString *) appKey appSecret:(NSString *) appSecret block:(AuthCallback) block;

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070105E42A9503B100F23C80 /* sleep_m_0310.p in Sources */ = {isa = PBXBuildFile; fileRef = 070105E22A9503B100F23C80 /* sleep_m_0310.p */; };
+		070105E52A9503B100F23C80 /* sleep_m_0310.b in Resources */ = {isa = PBXBuildFile; fileRef = 070105E32A9503B100F23C80 /* sleep_m_0310.b */; };
+		070105E72A9504D600F23C80 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 070105E62A9504D600F23C80 /* ViewController.mm */; };
 		070740F62987C4150053B0E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 070740F52987C4150053B0E8 /* AppDelegate.m */; };
 		070740F92987C4150053B0E8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 070740F82987C4150053B0E8 /* SceneDelegate.m */; };
-		070740FC2987C4150053B0E8 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 070740FB2987C4150053B0E8 /* MainViewController.m */; };
 		070741012987C4150053B0E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 070741002987C4150053B0E8 /* Assets.xcassets */; };
 		070741042987C4150053B0E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 070741022987C4150053B0E8 /* LaunchScreen.storyboard */; };
 		070741072987C4150053B0E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 070741062987C4150053B0E8 /* main.m */; };
@@ -26,13 +28,9 @@
 		07726E35298CD4D700E5664F /* DeviceTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 07726E34298CD4D700E5664F /* DeviceTableCell.m */; };
 		07726E3C298CFA0F00E5664F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 07726E3A298CFA0F00E5664F /* MBProgressHUD.m */; };
 		07726E3F298CFA4F00E5664F /* MBProgressUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 07726E3E298CFA4F00E5664F /* MBProgressUtils.m */; };
-		078190112A7FA8B300152E96 /* sleep_m_0310.b in Resources */ = {isa = PBXBuildFile; fileRef = 0781900F2A7FA8B300152E96 /* sleep_m_0310.b */; };
-		078190122A7FA8B300152E96 /* sleep_m_0310.p in Sources */ = {isa = PBXBuildFile; fileRef = 078190102A7FA8B300152E96 /* sleep_m_0310.p */; };
 		07845E5829BB3961006AAEAB /* LookWaveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07845E5729BB3961006AAEAB /* LookWaveVC.m */; };
 		07845E5B29BB7BD5006AAEAB /* AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 07845E5A29BB7BD5006AAEAB /* AES.m */; };
 		07BC03DD2991159700BDC703 /* libFlexPasterSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BC03D92991159700BDC703 /* libFlexPasterSDK.a */; };
-		07CCE5FE298BE1BE00FA8575 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 07CCE5FD298BE1BE00FA8575 /* ViewController.mm */; };
-		07EB39052992022800792974 /* PWMD5Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB39032992022800792974 /* PWMD5Utilities.m */; };
 		07EB3915299221B600792974 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB390B299221B600792974 /* AFURLResponseSerialization.m */; };
 		07EB3916299221B600792974 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB390C299221B600792974 /* AFHTTPSessionManager.m */; };
 		07EB3917299221B600792974 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB390E299221B600792974 /* AFURLSessionManager.m */; };
@@ -59,13 +57,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		070740F12987C4150053B0E8 /* OpenSDKDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSDKDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		070105E22A9503B100F23C80 /* sleep_m_0310.p */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = sleep_m_0310.p; sourceTree = "<group>"; };
+		070105E32A9503B100F23C80 /* sleep_m_0310.b */ = {isa = PBXFileReference; lastKnownFileType = file; path = sleep_m_0310.b; sourceTree = "<group>"; };
+		070105E62A9504D600F23C80 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		070740F12987C4150053B0E8 /* OpenSDKDemoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSDKDemoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		070740F42987C4150053B0E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		070740F52987C4150053B0E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		070740F72987C4150053B0E8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		070740F82987C4150053B0E8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		070740FA2987C4150053B0E8 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		070740FB2987C4150053B0E8 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		070740FA2987C4150053B0E8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		070741002987C4150053B0E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		070741032987C4150053B0E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		070741052987C4150053B0E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,8 +95,6 @@
 		07726E3B298CFA0F00E5664F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		07726E3D298CFA4F00E5664F /* MBProgressUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressUtils.h; sourceTree = "<group>"; };
 		07726E3E298CFA4F00E5664F /* MBProgressUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressUtils.m; sourceTree = "<group>"; };
-		0781900F2A7FA8B300152E96 /* sleep_m_0310.b */ = {isa = PBXFileReference; lastKnownFileType = file; path = sleep_m_0310.b; sourceTree = "<group>"; };
-		078190102A7FA8B300152E96 /* sleep_m_0310.p */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = sleep_m_0310.p; sourceTree = "<group>"; };
 		07845E5629BB3961006AAEAB /* LookWaveVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LookWaveVC.h; sourceTree = "<group>"; };
 		07845E5729BB3961006AAEAB /* LookWaveVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LookWaveVC.m; sourceTree = "<group>"; };
 		07845E5929BB7BD5006AAEAB /* AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AES.h; sourceTree = "<group>"; };
@@ -109,10 +107,6 @@
 		07A2C94329B8742200A92FE6 /* PasterConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterConstant.h; sourceTree = "<group>"; };
 		07A2C94429B8742200A92FE6 /* FlexPasterSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlexPasterSDK.h; sourceTree = "<group>"; };
 		07BC03D92991159700BDC703 /* libFlexPasterSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlexPasterSDK.a; sourceTree = "<group>"; };
-		07CCE5FC298BE1BE00FA8575 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		07CCE5FD298BE1BE00FA8575 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
-		07EB39032992022800792974 /* PWMD5Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PWMD5Utilities.m; sourceTree = "<group>"; };
-		07EB39042992022800792974 /* PWMD5Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWMD5Utilities.h; sourceTree = "<group>"; };
 		07EB3907299221B600792974 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		07EB3908299221B600792974 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		07EB3909299221B600792974 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -160,11 +154,11 @@
 		070740E82987C4150053B0E8 = {
 			isa = PBXGroup;
 			children = (
-				0781900F2A7FA8B300152E96 /* sleep_m_0310.b */,
-				078190102A7FA8B300152E96 /* sleep_m_0310.p */,
+				070105E32A9503B100F23C80 /* sleep_m_0310.b */,
+				070105E22A9503B100F23C80 /* sleep_m_0310.p */,
 				070740F32987C4150053B0E8 /* OpenSDKDemo */,
-				0707410F2987C4160053B0E8 /* PasterSDKTests */,
-				070741192987C4160053B0E8 /* PasterSDKUITests */,
+				0707410F2987C4160053B0E8 /* OpenSDKTests */,
+				070741192987C4160053B0E8 /* OpenSDKUITests */,
 				070740F22987C4150053B0E8 /* Products */,
 				070741442988BEE30053B0E8 /* Frameworks */,
 			);
@@ -173,7 +167,7 @@
 		070740F22987C4150053B0E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				070740F12987C4150053B0E8 /* OpenSDKDemo.app */,
+				070740F12987C4150053B0E8 /* OpenSDKDemoDemo.app */,
 				0707410C2987C4160053B0E8 /* OpenSDKDemoTests.xctest */,
 				070741162987C4160053B0E8 /* OpenSDKDemoUITests.xctest */,
 			);
@@ -183,26 +177,20 @@
 		070740F32987C4150053B0E8 /* OpenSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
-				076DE1EE29BC54A9006441F3 /* RNCryptor */,
-				07845E5929BB7BD5006AAEAB /* AES.h */,
-				07845E5A29BB7BD5006AAEAB /* AES.m */,
-				07EB3906299221B600792974 /* AFNetworking */,
-				07EB39042992022800792974 /* PWMD5Utilities.h */,
-				07EB39032992022800792974 /* PWMD5Utilities.m */,
 				07BC03D12991159700BDC703 /* flexPaster */,
 				07726E39298CFA0F00E5664F /* MBProgress */,
 				070740F42987C4150053B0E8 /* AppDelegate.h */,
 				070740F52987C4150053B0E8 /* AppDelegate.m */,
 				070740F72987C4150053B0E8 /* SceneDelegate.h */,
 				070740F82987C4150053B0E8 /* SceneDelegate.m */,
-				070740FA2987C4150053B0E8 /* MainViewController.h */,
-				070740FB2987C4150053B0E8 /* MainViewController.m */,
+				070740FA2987C4150053B0E8 /* ViewController.h */,
+				070105E62A9504D600F23C80 /* ViewController.mm */,
 				070741002987C4150053B0E8 /* Assets.xcassets */,
 				070741022987C4150053B0E8 /* LaunchScreen.storyboard */,
 				070741052987C4150053B0E8 /* Info.plist */,
+				07845E5929BB7BD5006AAEAB /* AES.h */,
+				07845E5A29BB7BD5006AAEAB /* AES.m */,
 				070741062987C4150053B0E8 /* main.m */,
-				07CCE5FC298BE1BE00FA8575 /* ViewController.h */,
-				07CCE5FD298BE1BE00FA8575 /* ViewController.mm */,
 				07726E30298CBB0B00E5664F /* DeviceListViewController.h */,
 				07726E31298CBB0B00E5664F /* DeviceListViewController.m */,
 				07726E33298CD4D700E5664F /* DeviceTableCell.h */,
@@ -215,21 +203,21 @@
 			path = OpenSDKDemo;
 			sourceTree = "<group>";
 		};
-		0707410F2987C4160053B0E8 /* PasterSDKTests */ = {
+		0707410F2987C4160053B0E8 /* OpenSDKTests */ = {
 			isa = PBXGroup;
 			children = (
 				070741102987C4160053B0E8 /* PasterSDKTests.m */,
 			);
-			path = PasterSDKTests;
+			path = OpenSDKTests;
 			sourceTree = "<group>";
 		};
-		070741192987C4160053B0E8 /* PasterSDKUITests */ = {
+		070741192987C4160053B0E8 /* OpenSDKUITests */ = {
 			isa = PBXGroup;
 			children = (
 				0707411A2987C4160053B0E8 /* PasterSDKUITests.m */,
 				0707411C2987C4160053B0E8 /* PasterSDKUITestsLaunchTests.m */,
 			);
-			path = PasterSDKUITests;
+			path = OpenSDKUITests;
 			sourceTree = "<group>";
 		};
 		070741442988BEE30053B0E8 /* Frameworks */ = {
@@ -270,6 +258,8 @@
 		07BC03D12991159700BDC703 /* flexPaster */ = {
 			isa = PBXGroup;
 			children = (
+				07EB3906299221B600792974 /* AFNetworking */,
+				076DE1EE29BC54A9006441F3 /* RNCryptor */,
 				07A2C94229B8742200A92FE6 /* BLEModel.h */,
 				07A2C93E29B8742200A92FE6 /* DeviceModel.h */,
 				07A2C94129B8742200A92FE6 /* DeviceTypeModel.h */,
@@ -306,9 +296,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		070740F02987C4150053B0E8 /* OpenSDKDemo */ = {
+		070740F02987C4150053B0E8 /* OpenSDKDemoDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 070741202987C4160053B0E8 /* Build configuration list for PBXNativeTarget "OpenSDKDemo" */;
+			buildConfigurationList = 070741202987C4160053B0E8 /* Build configuration list for PBXNativeTarget "OpenSDKDemoDemo" */;
 			buildPhases = (
 				070740ED2987C4150053B0E8 /* Sources */,
 				070740EE2987C4150053B0E8 /* Frameworks */,
@@ -318,9 +308,9 @@
 			);
 			dependencies = (
 			);
-			name = OpenSDKDemo;
+			name = OpenSDKDemoDemo;
 			productName = PasterSDK;
-			productReference = 070740F12987C4150053B0E8 /* OpenSDKDemo.app */;
+			productReference = 070740F12987C4150053B0E8 /* OpenSDKDemoDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0707410B2987C4160053B0E8 /* OpenSDKDemoTests */ = {
@@ -394,7 +384,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				070740F02987C4150053B0E8 /* OpenSDKDemo */,
+				070740F02987C4150053B0E8 /* OpenSDKDemoDemo */,
 				0707410B2987C4160053B0E8 /* OpenSDKDemoTests */,
 				070741152987C4160053B0E8 /* OpenSDKDemoUITests */,
 			);
@@ -408,7 +398,7 @@
 			files = (
 				070741042987C4150053B0E8 /* LaunchScreen.storyboard in Resources */,
 				070741012987C4150053B0E8 /* Assets.xcassets in Resources */,
-				078190112A7FA8B300152E96 /* sleep_m_0310.b in Resources */,
+				070105E52A9503B100F23C80 /* sleep_m_0310.b in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,23 +424,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				076DE1FB29BC54A9006441F3 /* RNEncryptor.m in Sources */,
-				070740FC2987C4150053B0E8 /* MainViewController.m in Sources */,
 				07845E5829BB3961006AAEAB /* LookWaveVC.m in Sources */,
 				070740F62987C4150053B0E8 /* AppDelegate.m in Sources */,
-				07CCE5FE298BE1BE00FA8575 /* ViewController.mm in Sources */,
 				076DE1FA29BC54A9006441F3 /* RNDecryptor.m in Sources */,
 				076DE1F929BC54A9006441F3 /* RNCryptor.m in Sources */,
 				07EB3916299221B600792974 /* AFHTTPSessionManager.m in Sources */,
+				070105E42A9503B100F23C80 /* sleep_m_0310.p in Sources */,
 				07726E3C298CFA0F00E5664F /* MBProgressHUD.m in Sources */,
-				078190122A7FA8B300152E96 /* sleep_m_0310.p in Sources */,
 				07EB3918299221B600792974 /* AFURLRequestSerialization.m in Sources */,
 				07EB3915299221B600792974 /* AFURLResponseSerialization.m in Sources */,
 				076DE1FC29BC54A9006441F3 /* RNCryptorEngine.m in Sources */,
 				07EB3919299221B600792974 /* AFNetworkReachabilityManager.m in Sources */,
-				07EB39052992022800792974 /* PWMD5Utilities.m in Sources */,
 				070741072987C4150053B0E8 /* main.m in Sources */,
 				07726E3F298CFA4F00E5664F /* MBProgressUtils.m in Sources */,
 				07726E35298CD4D700E5664F /* DeviceTableCell.m in Sources */,
+				070105E72A9504D600F23C80 /* ViewController.mm in Sources */,
 				07EB391A299221B600792974 /* AFSecurityPolicy.m in Sources */,
 				070740F92987C4150053B0E8 /* SceneDelegate.m in Sources */,
 				07845E5B29BB7BD5006AAEAB /* AES.m in Sources */,
@@ -481,12 +469,12 @@
 /* Begin PBXTargetDependency section */
 		0707410E2987C4160053B0E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 070740F02987C4150053B0E8 /* OpenSDKDemo */;
+			target = 070740F02987C4150053B0E8 /* OpenSDKDemoDemo */;
 			targetProxy = 0707410D2987C4160053B0E8 /* PBXContainerItemProxy */;
 		};
 		070741182987C4160053B0E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 070740F02987C4150053B0E8 /* OpenSDKDemo */;
+			target = 070740F02987C4150053B0E8 /* OpenSDKDemoDemo */;
 			targetProxy = 070741172987C4160053B0E8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -693,7 +681,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.PasterSDKTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.OpenSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -711,7 +699,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.PasterSDKTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.OpenSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -725,13 +713,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JK5725AN7B;
+				GCC_PREFIX_HEADER = flex_ios_open_sdk/OpenSDKDemo/GlobalPrefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.PasterSDKUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.OpenSDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PasterSDK;
+				TEST_TARGET_NAME = OpenSDK;
 			};
 			name = Debug;
 		};
@@ -741,13 +731,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JK5725AN7B;
+				GCC_PREFIX_HEADER = flex_ios_open_sdk/OpenSDKDemo/GlobalPrefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.PasterSDKUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flexolink.sdk.OpenSDKUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = PasterSDK;
+				TEST_TARGET_NAME = OpenSDK;
 			};
 			name = Release;
 		};
@@ -763,7 +755,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		070741202987C4160053B0E8 /* Build configuration list for PBXNativeTarget "OpenSDKDemo" */ = {
+		070741202987C4160053B0E8 /* Build configuration list for PBXNativeTarget "OpenSDKDemoDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				070741212987C4160053B0E8 /* Debug */,

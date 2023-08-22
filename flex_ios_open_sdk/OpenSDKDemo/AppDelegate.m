@@ -7,15 +7,8 @@
 
 #import "AppDelegate.h"
 #import "FlexPasterSDK.h"
-#import <CommonCrypto/CommonCryptor.h>
-#import "AES.h"
-#import "RNEncryptor.h"
-#import "RNDecryptor.h"
-#import "RNCryptor.h"
 
 @interface AppDelegate ()
-
-
 
 @end
 

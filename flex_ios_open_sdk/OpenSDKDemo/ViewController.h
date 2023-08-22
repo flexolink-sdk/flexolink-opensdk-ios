@@ -2,15 +2,25 @@
 //  ViewController.h
 //  PasterSDK
 //
-//  Created by frank on 2023/2/2.
+//  Created by frank on 2023/1/30.
 //
 
 #import <UIKit/UIKit.h>
-
-NS_ASSUME_NONNULL_BEGIN
+@class ApiModel;
 
 @interface ViewController : UIViewController
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface ApiModel : NSObject
+@property(nonatomic, copy) NSString* showTitle;
+///api 名称
+@property(nonatomic, copy) NSString* action;
+///是否已经授权
+@property(nonatomic, assign) BOOL isAuthority;
+
+
+- (instancetype) initWithShowTitle:(NSString *) showTitle action:(NSString *) action;
+
+@end
+

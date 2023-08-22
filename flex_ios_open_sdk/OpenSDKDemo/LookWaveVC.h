@@ -1,6 +1,6 @@
 //
 //  LookWaveVC.h
-//  OpenSDKDemo
+//  PasterSDKDemoDemo
 //
 //  Created by frank on 2023/3/10.
 //
