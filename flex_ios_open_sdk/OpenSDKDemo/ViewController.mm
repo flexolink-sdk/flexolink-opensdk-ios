@@ -10,25 +10,27 @@
 #import "MBProgressUtils.h"
 #import "FlexPasterSDK.h"
 #import "LookWaveVC.h"
+#import "RealIndexVC.h"
 
-#define scanAction    @"scanBleDevice"                     ///扫描
-#define stopScanAction    @"stopScan"             ///停止扫描
-#define connectAction    @"connect"               ///连接
-#define statusAction    @"isConnected"                 ///连接状态
-#define closeConnectAction    @"closeDevice"     ///关闭连接
-#define receiveAction    @"setRealDataListener"               ///接收数据
-#define subDataAction    @"pickDataByPointStamp"               ///截取数据
-#define rssiAction    @"getDeviceRssi"                     ///信号强度
-#define batteryAction    @"getBattery"               ///设备电量
-#define isWearAction    @"isWearPatch"                 ///是否穿戴
-#define filterParamAction    @"setFilterParam"       ///滤波参数
-#define startRecordAction    @"startRecord"       ///开始记录
-#define stopRecordAction    @"stopRecord"         ///停止记录
-#define addEventAction    @"addEvent"             ///添加事件
-#define signalQualityAction    @"SignalQuality"   ///信号质量
-#define deviceInfoAction    @"deviceInfo"         ///设备信息
+#define scanAction    @"scanBleDevice"                      ///扫描
+#define stopScanAction    @"stopScan"                       ///停止扫描
+#define connectAction    @"connect"                         ///连接
+#define statusAction    @"isConnected"                      ///连接状态
+#define closeConnectAction    @"closeDevice"                ///关闭连接
+#define receiveAction    @"setRealDataListener"             ///接收数据
+#define subDataAction    @"pickDataByPointStamp"            ///截取数据
+#define rssiAction    @"getDeviceRssi"                      ///信号强度
+#define batteryAction    @"getBattery"                      ///设备电量
+#define isWearAction    @"isWearPatch"                      ///是否穿戴
+#define filterParamAction    @"setFilterParam"              ///滤波参数
+#define startRecordAction    @"startRecord"                 ///开始记录
+#define stopRecordAction    @"stopRecord"                   ///停止记录
+#define addEventAction    @"addEvent"                       ///添加事件
+#define signalQualityAction    @"signalQuality"             ///信号质量
+#define deviceInfoAction    @"deviceInfo"                   ///设备信息
 #define onlineStageAction    @"setSleepStageListener"       ///分期状态
-#define lookWaveAction    @"lookWaveAction"       ///查看波形
+#define lookWaveAction    @"lookWaveAction"                 ///查看波形
+#define realIndexAction    @"sleepRealIndex"                ///实时指标
 
 
 #define AppKey @"rla3a8ddefdfca"
@@ -72,7 +74,9 @@ static NSString *cellId = @"cellId";
 //            [[Model alloc] initWithShowTitle:@"设备信息" action:deviceInfoAction],
             [[ApiModel alloc] initWithShowTitle:@"分期状态" action:onlineStageAction],
             [[ApiModel alloc] initWithShowTitle:@"查看波形" action:lookWaveAction],
+            [[ApiModel alloc] initWithShowTitle:@"实时指标" action:realIndexAction],
         ]];
+        
     }
     
     
@@ -90,13 +94,16 @@ static NSString *cellId = @"cellId";
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     cell.textLabel.text = self.items[indexPath.row].showTitle;
+    
     cell.detailTextLabel.text = self.items[indexPath.row].isAuthority ? @"已授权" : @"未授权";
     cell.detailTextLabel.textColor = self.items[indexPath.row].isAuthority ? [UIColor blackColor] : [UIColor redColor];
     
-    if (indexPath.row == self.items.count - 1) {
+    ///查看波形默认提供，无需授权
+    if ([self.items[indexPath.row].showTitle isEqualToString:@"查看波形"]) {
         cell.detailTextLabel.hidden = YES;
-    } else {
-        cell.detailTextLabel.hidden = NO;
+    }
+    if ([self.items[indexPath.row].showTitle isEqualToString:@"实时指标"]) {
+        cell.detailTextLabel.hidden = YES;
     }
     
     return cell;
@@ -318,13 +325,24 @@ static NSString *cellId = @"cellId";
         
         [self.navigationController pushViewController:vc animated:YES];
         
+    } else if ([action isEqualToString:realIndexAction]) {
+        if (![FlexPasterSDK sharedInstance].isConnected) {
+            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
+            return;
+        }
+        if (!self.isOpenSuccess) {
+            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+            return;
+        }
+        
+        [self.navigationController pushViewController:[[RealIndexVC alloc] init] animated:YES];
     }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"柔灵SDK";
+    self.title = @"柔灵 iOS SDK";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -352,6 +370,7 @@ static NSString *cellId = @"cellId";
             
         }
         
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [tableView reloadData];
         });
@@ -369,7 +388,8 @@ static NSString *cellId = @"cellId";
 }
 #pragma mark RealTimeDataDelegate
 - (void) onRealTimeData:(NSMutableArray<NSNumber *> *)eegData {
-//    NSLog(@"onRealTimeFilterData 接收到原始数据")
+//    NSLog(@"onRealTimeFilterData 接收到原始数据");
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RealIndexVC" object:eegData];
 }
 - (void) onRealTimeFilterData:(NSMutableArray<NSNumber *> *)eegData {
 //    NSLog(@"onRealTimeFilterData 接收到滤波数据")

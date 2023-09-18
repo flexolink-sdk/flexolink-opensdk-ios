@@ -19,6 +19,8 @@
 		0707411B2987C4160053B0E8 /* PasterSDKUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707411A2987C4160053B0E8 /* PasterSDKUITests.m */; };
 		0707411D2987C4160053B0E8 /* PasterSDKUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707411C2987C4160053B0E8 /* PasterSDKUITestsLaunchTests.m */; };
 		070741462988BEE30053B0E8 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070741452988BEE30053B0E8 /* CoreMotion.framework */; };
+		075983552AB8422B00D21BE0 /* libSleepRealIndex.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 075983542AB8422B00D21BE0 /* libSleepRealIndex.a */; };
+		075983592AB8433100D21BE0 /* RealIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 075983582AB8433100D21BE0 /* RealIndexVC.m */; };
 		076DE1F929BC54A9006441F3 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 076DE1F029BC54A9006441F3 /* RNCryptor.m */; };
 		076DE1FA29BC54A9006441F3 /* RNDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 076DE1F629BC54A9006441F3 /* RNDecryptor.m */; };
 		076DE1FB29BC54A9006441F3 /* RNEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 076DE1F729BC54A9006441F3 /* RNEncryptor.m */; };
@@ -76,6 +78,10 @@
 		0707411A2987C4160053B0E8 /* PasterSDKUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasterSDKUITests.m; sourceTree = "<group>"; };
 		0707411C2987C4160053B0E8 /* PasterSDKUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasterSDKUITestsLaunchTests.m; sourceTree = "<group>"; };
 		070741452988BEE30053B0E8 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		075983542AB8422B00D21BE0 /* libSleepRealIndex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSleepRealIndex.a; sourceTree = "<group>"; };
+		075983562AB8426000D21BE0 /* SleepRealIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SleepRealIndex.h; sourceTree = "<group>"; };
+		075983572AB8433100D21BE0 /* RealIndexVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RealIndexVC.h; sourceTree = "<group>"; };
+		075983582AB8433100D21BE0 /* RealIndexVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealIndexVC.m; sourceTree = "<group>"; };
 		076DE1EF29BC54A9006441F3 /* RNDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDecryptor.h; sourceTree = "<group>"; };
 		076DE1F029BC54A9006441F3 /* RNCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCryptor.m; sourceTree = "<group>"; };
 		076DE1F129BC54A9006441F3 /* RNCryptor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor+Private.h"; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 			files = (
 				07BC03DD2991159700BDC703 /* libFlexPasterSDK.a in Frameworks */,
 				076DE1FE29BC54CD006441F3 /* Security.framework in Frameworks */,
+				075983552AB8422B00D21BE0 /* libSleepRealIndex.a in Frameworks */,
 				070741462988BEE30053B0E8 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +206,8 @@
 				07726E3E298CFA4F00E5664F /* MBProgressUtils.m */,
 				07845E5629BB3961006AAEAB /* LookWaveVC.h */,
 				07845E5729BB3961006AAEAB /* LookWaveVC.m */,
+				075983572AB8433100D21BE0 /* RealIndexVC.h */,
+				075983582AB8433100D21BE0 /* RealIndexVC.m */,
 			);
 			path = OpenSDKDemo;
 			sourceTree = "<group>";
@@ -267,6 +276,8 @@
 				07A2C94329B8742200A92FE6 /* PasterConstant.h */,
 				07A2C94029B8742200A92FE6 /* PasterListener.h */,
 				07A2C93F29B8742200A92FE6 /* UserInfoModel.h */,
+				075983562AB8426000D21BE0 /* SleepRealIndex.h */,
+				075983542AB8422B00D21BE0 /* libSleepRealIndex.a */,
 				07BC03D92991159700BDC703 /* libFlexPasterSDK.a */,
 			);
 			path = flexPaster;
@@ -442,6 +453,7 @@
 				07EB391A299221B600792974 /* AFSecurityPolicy.m in Sources */,
 				070740F92987C4150053B0E8 /* SceneDelegate.m in Sources */,
 				07845E5B29BB7BD5006AAEAB /* AES.m in Sources */,
+				075983592AB8433100D21BE0 /* RealIndexVC.m in Sources */,
 				07EB3917299221B600792974 /* AFURLSessionManager.m in Sources */,
 				07726E32298CBB0B00E5664F /* DeviceListViewController.m in Sources */,
 			);
