@@ -34,6 +34,6 @@
 
 ##### 7、SDK 授权，工程启动后需要一次授权，您可在 appdelegate 或其他地方执行代码授权，Demo 的授权位置在 ViewController.m 中
 
-##### 8、睡眠实时指数，请导入 flexPaster 目录下的 libSleepRealIndex.a 静态库和 SleepRealIndex.h 头文件
+##### 8、睡眠实时指数，请导入 flexPaster 目录下的 libSleepRealIndex.a 静态库和 SleepRealIndex.h 头文件，调用方法 + (NSDictionary *)realIndexWith:(NSMutableArray<NSNumber *> *)eegArray deviceType:(NSString *) deviceType;
 
 ![image-20230918182731848](https://p.ipic.vip/x6anlz.png)

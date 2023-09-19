@@ -33,8 +33,8 @@
 #define realIndexAction    @"sleepRealIndex"                ///实时指标
 
 
-#define AppKey @"rla3a8ddefdfca"
-#define AppSecret @"a3a8ddefdfca1949631353017dd1b038"
+#define AppKey @""
+#define AppSecret @""
 
 #define equal(str1, str2) [str1 isEqualToString:str2]
 
@@ -44,10 +44,12 @@ static NSString *cellId = @"cellId";
 
 @property(nonatomic, strong) NSMutableArray<NSNumber *>* tempDataArray;
 @property(nonatomic, strong) NSMutableArray<ApiModel *>* items;
-@property(nonatomic, assign) BOOL isOpenSuccess;
 
 @property(nonatomic, copy) NSString* binPath;
 @property(nonatomic, copy) NSString* paramPath;
+
+///是否打开实时数据监听
+@property(nonatomic, assign) BOOL isOpenReal;
 
 @end
 
@@ -155,23 +157,16 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:subDataAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
+        if (![self isConnected]) {
             return;
         }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
-            return;
-        }
-        
         
         [[FlexPasterSDK sharedInstance] pickupDataListener:self second:5];
         
     }
     else  if ([action isEqualToString:rssiAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
@@ -180,8 +175,7 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:batteryAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
@@ -191,12 +185,7 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:isWearAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
-            return;
-        }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
@@ -212,12 +201,7 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:startRecordAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
-            return;
-        }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
@@ -234,12 +218,7 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:stopRecordAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
-            return;
-        }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
@@ -248,12 +227,7 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:addEventAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
-            return;
-        }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
@@ -265,19 +239,17 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:signalQualityAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
-            return;
-        }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
-            return;
-        }
-        if (!self.tempDataArray || self.tempDataArray.count == 0) {
-            [MBProgressUtils showMsg:@"请先截取一段数据" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
+        if (!self.isOpenReal) {
+            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
+            return;
+        }
+        
+        ///下面这行代码是举例，将数据源和数据源长度传入，调用数据质量检测方法。
+        ///实际中，数据源大小由开发者自己定义，建议数据长度是10秒钟，即10 * 250 条数据。数据源请在实时数据回调函数 onRealTimeData 中保存
         BOOL signalQuality = [[FlexPasterSDK sharedInstance] signalQualityWithData:self.tempDataArray dataLen:self.tempDataArray.count];
         [MBProgressUtils showMsg:signalQuality ? @"数据质量好" : @"数据质量差" view:self.view];
         
@@ -297,12 +269,7 @@ static NSString *cellId = @"cellId";
     }
     else  if ([action isEqualToString:onlineStageAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
-            return;
-        }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+        if (![self isConnected]) {
             return;
         }
         
@@ -312,12 +279,12 @@ static NSString *cellId = @"cellId";
     }
     else if ([action isEqualToString:lookWaveAction]) {
         
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
+        if (![self isConnected]) {
             return;
         }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+        
+        if (!self.isOpenReal) {
+            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
             return;
         }
         
@@ -326,12 +293,12 @@ static NSString *cellId = @"cellId";
         [self.navigationController pushViewController:vc animated:YES];
         
     } else if ([action isEqualToString:realIndexAction]) {
-        if (![FlexPasterSDK sharedInstance].isConnected) {
-            [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
+        if (![self isConnected]) {
             return;
         }
-        if (!self.isOpenSuccess) {
-            [MBProgressUtils showMsg:@"请先打开数据实时监听" view:self.view];
+        
+        if (!self.isOpenReal) {
+            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
             return;
         }
         
@@ -378,6 +345,22 @@ static NSString *cellId = @"cellId";
     }];
 }
 
+- (BOOL) isConnected {
+    if (![FlexPasterSDK sharedInstance].isConnected) {
+        [MBProgressUtils showMsg:@"请先连接设备" view:self.view];
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSMutableArray<NSNumber *> *) tempDataArray {
+    if (!_tempDataArray) {
+        _tempDataArray = [NSMutableArray array];
+    }
+    return _tempDataArray;
+}
+
 #pragma mark ScanPasterDelegate
 - (void) onScanResult:(BLEModel *)bleModel {
     NSLog(@"扫描到设备%@", bleModel.deviceName);
@@ -389,6 +372,10 @@ static NSString *cellId = @"cellId";
 #pragma mark RealTimeDataDelegate
 - (void) onRealTimeData:(NSMutableArray<NSNumber *> *)eegData {
 //    NSLog(@"onRealTimeFilterData 接收到原始数据");
+    [self.tempDataArray addObjectsFromArray:eegData];
+    if (self.tempDataArray.count > 10 * 250) {
+        [self.tempDataArray removeObjectsInRange:NSMakeRange(0, self.tempDataArray.count - 10 * 250)];
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RealIndexVC" object:eegData];
 }
 - (void) onRealTimeFilterData:(NSMutableArray<NSNumber *> *)eegData {
@@ -397,13 +384,12 @@ static NSString *cellId = @"cellId";
     
 }
 - (void) onOpenRealTime:(BOOL)isOpenSuccess {
-    self.isOpenSuccess = isOpenSuccess;
+    self.isOpenReal = YES;
     [MBProgressUtils showMsg:@"打开数据实时监听" view:self.view];
 }
 
 #pragma mark PickDataDelegate
 - (void) onPickUpData:(NSMutableArray<NSNumber *> *)eegData second:(NSUInteger)second {
-    self.tempDataArray = eegData;
     [MBProgressUtils showMsg:@"接收数据成功，请看回调函数或控制台" view:self.view];
 }
 

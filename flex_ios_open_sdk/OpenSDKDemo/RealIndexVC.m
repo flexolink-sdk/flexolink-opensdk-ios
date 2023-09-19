@@ -66,7 +66,7 @@
     self.mentalActivityLabel.frame = CGRectMake(20, 400, 200, 40);
     self.neurofatigueLabel.frame = CGRectMake(20, 500, 200, 40);
     
-//    self.signalResultLabel.text = @"实时数据质量检测结果";
+    self.signalResultLabel.text = @"请等待...";
     self.nerveRelaxationLabel.text = @"神经放松度";
     self.mentalActivityLabel.text = @"思维活跃度";
     self.neurofatigueLabel.text = @"神经疲劳度";
@@ -85,7 +85,7 @@
     [self.dataArray addObjectsFromArray:realArray];
     
     if (self.dataArray.count >= 2500) {
-        NSDictionary *dic = [SleepRealIndex signalQualityWith:self.dataArray deviceType:@"Flex-BM05"];
+        NSDictionary *dic = [SleepRealIndex realIndexWith:self.dataArray deviceType:@"Flex-BM05"];
         NSNumber *signal = [dic objectForKey:@"signal"];//实时信号检测是否通过
         if (signal.boolValue) {
             NSMutableArray<NSNumber *> *realResultArray = [dic objectForKey:@"data"];///实时信号检测结果
@@ -93,9 +93,9 @@
             self.nerveRelaxationLabel.text = [NSString stringWithFormat:@"神经放松度 %ld", realResultArray[0].integerValue];
             self.mentalActivityLabel.text = [NSString stringWithFormat:@"思维活跃度 %ld", realResultArray[1].integerValue];
             self.neurofatigueLabel.text = [NSString stringWithFormat:@"神经疲劳度 %ld", realResultArray[2].integerValue];
-//            self.signalResultLabel.text = @"实时数据质量检测结果：通过";
+            self.signalResultLabel.text = @"实时数据质量检测结果：通过";
         } else {
-//            self.signalResultLabel.text = @"实时数据质量检测结果：未通过";
+            self.signalResultLabel.text = @"实时数据质量检测结果：未通过";
         }
         ///每秒钟调用1次，因此减去 250 条数据，开发者可自行定义调用的频率，也可以使用定时器定时调用 [SleepRealIndex signalQualityWith deviceType]函数
         [self.dataArray removeObjectsInRange:NSMakeRange(0, 250)];
