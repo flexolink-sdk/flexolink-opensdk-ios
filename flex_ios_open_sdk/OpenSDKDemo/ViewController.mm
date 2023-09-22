@@ -30,7 +30,7 @@
 #define deviceInfoAction    @"deviceInfo"                   ///设备信息
 #define onlineStageAction    @"setSleepStageListener"       ///分期状态
 #define lookWaveAction    @"lookWaveAction"                 ///查看波形
-#define realIndexAction    @"sleepRealIndex"                ///实时指标
+#define realIndexAction    @"setIndexListener"              ///实时指标
 
 
 #define AppKey @""
@@ -102,9 +102,6 @@ static NSString *cellId = @"cellId";
     
     ///查看波形默认提供，无需授权
     if ([self.items[indexPath.row].showTitle isEqualToString:@"查看波形"]) {
-        cell.detailTextLabel.hidden = YES;
-    }
-    if ([self.items[indexPath.row].showTitle isEqualToString:@"实时指标"]) {
         cell.detailTextLabel.hidden = YES;
     }
     
