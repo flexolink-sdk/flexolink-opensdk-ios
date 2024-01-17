@@ -294,11 +294,6 @@ static NSString *cellId = @"cellId";
             return;
         }
         
-        if (!self.isOpenReal) {
-            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
-            return;
-        }
-        
         [self.navigationController pushViewController:[[RealIndexVC alloc] init] animated:YES];
     }
 }
@@ -397,7 +392,10 @@ static NSString *cellId = @"cellId";
 - (void) onStartRecordWithPath:(NSString *)edfPath {
     [MBProgressUtils showMsg:@"开始记录..." view:self.view];
 }
-- (void) onRecording {
+///eegArray 脑电
+///accelArray 加速度
+///gyroArray 角速度
+- (void) onRecordingEEG:(NSMutableArray<NSNumber *> *)eegArray accel:(NSMutableArray<NSNumber *> *)accelArray gyro:(NSMutableArray<NSNumber *> *)gyroArray {
     NSDateFormatter *formatter = [NSDateFormatter new];
     //    formatter.locale = [NSLocale currentLocale]; // Necessary?
     formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss SSS";

@@ -55,13 +55,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#pragma mark 睡眠实时数据协议
+@protocol RealIndexDelegate <NSObject>
+
+- (void) realIndexListener:(NSArray<NSNumber *> *) indexArray;
+
+@end
+
 #pragma mark 数据采集协议
 @protocol RecordDelegate <NSObject>
 
 @optional
 ///
 - (void) onStartRecordWithPath:(NSString *) edfPath;
-- (void) onRecording;
+- (void) onRecordingEEG:(NSMutableArray<NSNumber *> *) eegArray accel:(NSMutableArray<NSNumber *> *) accelArray gyro:(NSMutableArray<NSNumber *> *) gyroArray;
 - (void) onStopRecord;
 - (void) onRecordFailure:(RecordEventError) recordError;
 - (void) onRecordEventResult:(NSInteger) eventResult;
@@ -71,7 +78,5 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PasterListener : NSObject
 
 @end
-
-
 
 NS_ASSUME_NONNULL_END

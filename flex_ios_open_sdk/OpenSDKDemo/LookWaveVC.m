@@ -173,7 +173,7 @@
     if (eeg == 0) {
         return self.maxHeight / 2;
     }
-    NSLog(@"--y:%.6f", eeg);
+    
     ///滤波之后的值基本在 -20 到 20 之间
     eeg = eeg > 20 ? 20 : eeg;
     eeg = eeg < -20 ? -20 : eeg;

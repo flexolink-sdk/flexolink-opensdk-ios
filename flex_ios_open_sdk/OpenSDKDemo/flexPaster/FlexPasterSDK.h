@@ -63,8 +63,11 @@ NS_ASSUME_NONNULL_BEGIN
 ///设备信息
 - (DeviceTypeModel *) deviceInfo;
 
+- (void) setRealListener:(id<RealIndexDelegate>)listener deviceType:(NSString *)deviceType;
+
 /// sdk 授权
 - (void) authorityWithAppKey:(NSString *) appKey appSecret:(NSString *) appSecret block:(AuthCallback) block;
+
 
 @end
 
