@@ -75,6 +75,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#pragma mark 冥想协议
+@protocol MeditationDelegate <NSObject>
+///接收到冥想分数，0.5秒1次
+- (void) onMeditationScore:(CGFloat) score;
+@end
+
 @interface PasterListener : NSObject
 
 @end

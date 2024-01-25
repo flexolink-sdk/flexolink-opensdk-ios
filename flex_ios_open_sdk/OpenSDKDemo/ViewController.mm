@@ -30,7 +30,9 @@
 #define deviceInfoAction    @"deviceInfo"                   ///设备信息
 #define onlineStageAction    @"setSleepStageListener"       ///分期状态
 #define lookWaveAction    @"lookWaveAction"                 ///查看波形
-#define realIndexAction    @"setIndexListener"              ///实时指标
+#define realIndexAction    @"realIndexAction"               ///实时指标
+#define startMeditation    @"startMeditation"               ///开始冥想
+#define closeMeditation    @"closeMeditation"                 ///结束冥想
 
 
 #define AppKey @""
@@ -40,7 +42,7 @@
 
 static NSString *cellId = @"cellId";
 
-@interface ViewController ()<ScanPasterDelegate, PasterConnectDelegate, RealTimeDataDelegate, PickDataDelegate, RecordDelegate, OnlineStageDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ViewController ()<ScanPasterDelegate, PasterConnectDelegate, RealTimeDataDelegate, PickDataDelegate, RecordDelegate, OnlineStageDelegate, MeditationDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, strong) NSMutableArray<NSNumber *>* tempDataArray;
 @property(nonatomic, strong) NSMutableArray<ApiModel *>* items;
@@ -77,6 +79,8 @@ static NSString *cellId = @"cellId";
             [[ApiModel alloc] initWithShowTitle:@"分期状态" action:onlineStageAction],
             [[ApiModel alloc] initWithShowTitle:@"查看波形" action:lookWaveAction],
             [[ApiModel alloc] initWithShowTitle:@"实时指标" action:realIndexAction],
+            [[ApiModel alloc] initWithShowTitle:@"开始冥想" action:startMeditation],
+            [[ApiModel alloc] initWithShowTitle:@"结束冥想" action:closeMeditation],
         ]];
         
     }
@@ -295,6 +299,19 @@ static NSString *cellId = @"cellId";
         }
         
         [self.navigationController pushViewController:[[RealIndexVC alloc] init] animated:YES];
+    } else if ([action isEqualToString:startMeditation]) {
+        if (![self isConnected]) {
+            return;
+        }
+        
+        [[FlexPasterSDK sharedInstance] startMeditationWith:self];
+        
+        LookWaveVC *vc = [[LookWaveVC alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if ([action isEqualToString:closeMeditation]) {
+        
+        [[FlexPasterSDK sharedInstance] stopMeditation];
     }
 }
 
@@ -328,7 +345,6 @@ static NSString *cellId = @"cellId";
             }
             
         }
-        
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [tableView reloadData];
@@ -414,6 +430,12 @@ static NSString *cellId = @"cellId";
 - (void) onlineStage:(NSUInteger)stage {
     NSLog(@"分期结果：%ld", stage);
     ///0 深睡 1 浅睡 2 REM 3 清醒
+}
+
+#pragma mark MeditationDelegate
+- (void) onMeditationScore:(CGFloat)score {
+    NSLog(@"===score=%.f", score);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"meditation_score" object:@(score)];
 }
 @end
 

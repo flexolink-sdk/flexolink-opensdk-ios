@@ -65,6 +65,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void) setRealListener:(id<RealIndexDelegate>)listener deviceType:(NSString *)deviceType;
 
+///开始冥想
+- (void) startMeditationWith:(id<MeditationDelegate>) meditationDelegate;
+///结束冥想
+- (void) stopMeditation;
+
 /// sdk 授权
 - (void) authorityWithAppKey:(NSString *) appKey appSecret:(NSString *) appSecret block:(AuthCallback) block;
 

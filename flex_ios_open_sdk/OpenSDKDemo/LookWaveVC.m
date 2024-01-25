@@ -8,7 +8,7 @@
 #import "LookWaveVC.h"
 
 //一屏显示最大数量
-#define PointNumber  (1250)
+#define PointNumber  (100)
 
 @interface LookWaveVC ()
 @property(nonatomic, strong) CAShapeLayer* eegShapeLayer;
@@ -20,8 +20,10 @@
 @property(nonatomic, assign) CGFloat maxHeight;
 
 @property(nonatomic, strong) UIView* contentView;
-
+///脑电滤波后的值
 @property(nonatomic, strong) NSMutableArray<NSNumber *>* filterArray;
+///冥想数值
+@property(nonatomic, strong) NSMutableArray<NSNumber *>* meditationArray;
 
 @end
 
@@ -39,8 +41,10 @@
     self.maxHeight = 200;
     
     [self setupContentView];
-    
+    ///脑电波形
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drawWave:) name:@"eeg_filter_data" object:nil];
+    ///冥想数值
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drawMeditation:) name:@"meditation_score" object:nil];
 }
 
 /*
@@ -63,7 +67,6 @@
 -(CAShapeLayer *)eegShapeLayer{
     if (_eegShapeLayer == nil) {
         _eegShapeLayer = [CAShapeLayer layer];
-//        _eegShapeLayer.fillColor = [UIColor colorWithHexStr:@"#00E1FF" alpha:0.4].CGColor;
         _eegShapeLayer.lineWidth = 1;
         _eegShapeLayer.strokeColor = [UIColor whiteColor].CGColor;
         _eegShapeLayer.frame = CGRectMake(0.0, 0.0, self.maxWidth, self.maxHeight);
@@ -88,6 +91,12 @@
     }
     return _filterArray;
 }
+- (NSMutableArray<NSNumber *> *) meditationArray {
+    if (!_meditationArray) {
+        _meditationArray = [NSMutableArray array];
+    }
+    return _meditationArray;
+}
 
 - (void) setupContentView {
     
@@ -99,9 +108,9 @@
 
 
 // 绘制曲线操作
--(void)updateWave{
+-(void)updateWave:(NSMutableArray<NSNumber *> *) dataArray{
     
-    if (self.filterArray.count == 0) {
+    if (dataArray.count == 0) {
         return;
     }
     
@@ -111,21 +120,23 @@
 
     NSInteger startIndex = 0;
     
-    if (self.filterArray.count > PointNumber) {
-        startIndex = self.filterArray.count - PointNumber;
+    if (dataArray.count > PointNumber) {
+        startIndex = dataArray.count - PointNumber;
     }
 
     CGFloat unitWidth = self.maxWidth / PointNumber;
     
     CGPoint lastPoint = CGPointZero;
     
-    for (NSInteger i = startIndex; i < self.filterArray.count; i ++) {
+    for (NSInteger i = startIndex; i < dataArray.count; i ++) {
         
-        CGFloat yValue = self.filterArray[i].floatValue;
+        CGFloat yValue = dataArray[i].floatValue;
         
         CGFloat xValue = unitWidth * (i - startIndex);
         
         CGPoint pointValue = CGPointMake(xValue, yValue);
+        
+//        NSLog(@"-----x=%.f, y = %.f", xValue, yValue);
         
         if (i == startIndex) {
             
@@ -159,7 +170,19 @@
         [self.filterArray addObject:@(value)];
     }
     
-    [self updateWave];
+    [self updateWave:self.filterArray];
+    
+}
+#pragma mark 绘制冥想数值
+- (void) drawMeditation:(NSNotification *) noti {
+
+    NSNumber *number = noti.object;
+    CGFloat score = number.floatValue;
+    //计算 y 值
+    CGFloat showY = [self calculateMediYValue:score];
+    [self.meditationArray addObject:@(showY)];
+    
+    [self updateWave:self.meditationArray];
     
 }
 
@@ -179,6 +202,12 @@
     eeg = eeg < -20 ? -20 : eeg;
     
     return self.maxHeight / 2 + eeg / 40.0 * self.maxHeight / 2;
+    
+}
+
+-(CGFloat)calculateMediYValue:(CGFloat) score {
+    
+    return score / 100 * self.maxHeight;
     
 }
 @end
