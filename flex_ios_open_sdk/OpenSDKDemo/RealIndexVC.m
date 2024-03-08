@@ -28,13 +28,15 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupUI];
-    
+    ///打开实时指标
     [[FlexPasterSDK sharedInstance] setRealListener:self deviceType:@"Flex-BM05"];
     
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    ///关闭实时指标
+    [[FlexPasterSDK sharedInstance] closeRealData];
     
 }
 

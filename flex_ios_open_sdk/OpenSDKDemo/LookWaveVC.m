@@ -6,9 +6,10 @@
 //
 
 #import "LookWaveVC.h"
+#import "FlexPasterSDK.h"
 
 //一屏显示最大数量
-#define PointNumber  (100)
+#define PointNumber  (1000)
 
 @interface LookWaveVC ()
 @property(nonatomic, strong) CAShapeLayer* eegShapeLayer;
@@ -45,6 +46,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drawWave:) name:@"eeg_filter_data" object:nil];
     ///冥想数值
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(drawMeditation:) name:@"meditation_score" object:nil];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    ///如果开启了冥想分数，需要关闭
+    [[FlexPasterSDK sharedInstance] stopMeditation];
 }
 
 /*
@@ -182,7 +189,9 @@
     CGFloat showY = [self calculateMediYValue:score];
     [self.meditationArray addObject:@(showY)];
     
-    [self updateWave:self.meditationArray];
+    dispatch_async(dispatch_get_main_queue(), ^{    
+        [self updateWave:self.meditationArray];
+    });
     
 }
 

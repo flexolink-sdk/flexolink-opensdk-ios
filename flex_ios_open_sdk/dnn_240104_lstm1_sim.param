@@ -1,0 +1,14 @@
+7767517
+12 14
+Input                    input                    0 1 input
+Convolution1D            Conv_2                   1 1 input onnx::Pad_34 0=128 1=100 3=12 4=22 5=1 6=12800 9=1
+Pooling1D                MaxPool_5                1 1 onnx::Pad_34 input.11 1=8 2=8 3=2 5=1
+Convolution1D            Conv_7                   1 1 input.11 onnx::Pad_40 0=128 1=8 4=4 5=1 6=131072 9=1
+Convolution1D            Conv_10                  1 1 onnx::Pad_40 onnx::Pad_44 0=128 1=8 4=4 5=1 6=131072 9=1
+Convolution1D            Conv_13                  1 1 onnx::Pad_44 onnx::Pad_48 0=128 1=8 4=4 5=1 6=131072 9=1
+Pooling1D                MaxPool_16               1 1 onnx::Pad_48 onnx::Flatten_50 1=4 2=4 3=1 5=1
+Flatten                  Flatten_17               1 1 onnx::Flatten_50 input.51
+Reshape                  Reshape_19               1 1 input.51 input.55 0=2560 1=1
+LSTM                     LSTM_37                  1 3 input.55 onnx::Reshape_136 133 134 0=128 1=1310720
+Reshape                  Reshape_43               1 1 onnx::Reshape_136 input.59 0=128
+InnerProduct             Gemm_44                  1 1 input.59 output 0=5 1=1 2=640

@@ -72,6 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) onStopRecord;
 - (void) onRecordFailure:(RecordEventError) recordError;
 - (void) onRecordEventResult:(NSInteger) eventResult;
+- (void) onReturnUID:(NSString *) uid user:(NSString *) user edfName:(NSString *) edfName;
 
 @end
 
@@ -79,6 +80,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MeditationDelegate <NSObject>
 ///接收到冥想分数，0.5秒1次
 - (void) onMeditationScore:(CGFloat) score;
+@end
+
+#pragma mark 离线数据
+@protocol OfflineDataDelegate <NSObject>
+- (void) queryOfflineResultWithUid:(NSString *) uid;
+- (void) mergeOfflineDataWithEdf:(NSString *) edfName progress:(float)progress step:(NSInteger)code;
+
 @end
 
 @interface PasterListener : NSObject

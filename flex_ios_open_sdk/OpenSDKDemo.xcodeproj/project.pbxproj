@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		070105E42A9503B100F23C80 /* sleep_m_0310.p in Sources */ = {isa = PBXBuildFile; fileRef = 070105E22A9503B100F23C80 /* sleep_m_0310.p */; };
-		070105E52A9503B100F23C80 /* sleep_m_0310.b in Resources */ = {isa = PBXBuildFile; fileRef = 070105E32A9503B100F23C80 /* sleep_m_0310.b */; };
 		070105E72A9504D600F23C80 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 070105E62A9504D600F23C80 /* ViewController.mm */; };
+		0706FEEE2B888D870086C9C3 /* dnn_240104_lstm1_sim.bin in Resources */ = {isa = PBXBuildFile; fileRef = 0706FEEC2B888D860086C9C3 /* dnn_240104_lstm1_sim.bin */; };
+		0706FEEF2B888D870086C9C3 /* dnn_240104_lstm1_sim.param in Resources */ = {isa = PBXBuildFile; fileRef = 0706FEED2B888D870086C9C3 /* dnn_240104_lstm1_sim.param */; };
+		0706FF222B8ED8D50086C9C3 /* quicklz.c in Sources */ = {isa = PBXBuildFile; fileRef = 0706FF212B8ED8D50086C9C3 /* quicklz.c */; };
 		070740F62987C4150053B0E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 070740F52987C4150053B0E8 /* AppDelegate.m */; };
 		070740F92987C4150053B0E8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 070740F82987C4150053B0E8 /* SceneDelegate.m */; };
 		070741012987C4150053B0E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 070741002987C4150053B0E8 /* Assets.xcassets */; };
@@ -19,7 +20,6 @@
 		0707411B2987C4160053B0E8 /* PasterSDKUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707411A2987C4160053B0E8 /* PasterSDKUITests.m */; };
 		0707411D2987C4160053B0E8 /* PasterSDKUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0707411C2987C4160053B0E8 /* PasterSDKUITestsLaunchTests.m */; };
 		070741462988BEE30053B0E8 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 070741452988BEE30053B0E8 /* CoreMotion.framework */; };
-		074F19A72AC06A6500677E49 /* sleep_m_0310.p in Resources */ = {isa = PBXBuildFile; fileRef = 070105E22A9503B100F23C80 /* sleep_m_0310.p */; };
 		075983592AB8433100D21BE0 /* RealIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 075983582AB8433100D21BE0 /* RealIndexVC.m */; };
 		076DE1F929BC54A9006441F3 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 076DE1F029BC54A9006441F3 /* RNCryptor.m */; };
 		076DE1FA29BC54A9006441F3 /* RNDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 076DE1F629BC54A9006441F3 /* RNDecryptor.m */; };
@@ -59,9 +59,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		070105E22A9503B100F23C80 /* sleep_m_0310.p */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = sleep_m_0310.p; sourceTree = "<group>"; };
-		070105E32A9503B100F23C80 /* sleep_m_0310.b */ = {isa = PBXFileReference; lastKnownFileType = file; path = sleep_m_0310.b; sourceTree = "<group>"; };
 		070105E62A9504D600F23C80 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		0706FEEC2B888D860086C9C3 /* dnn_240104_lstm1_sim.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = dnn_240104_lstm1_sim.bin; sourceTree = "<group>"; };
+		0706FEED2B888D870086C9C3 /* dnn_240104_lstm1_sim.param */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dnn_240104_lstm1_sim.param; sourceTree = "<group>"; };
+		0706FF202B8ED89C0086C9C3 /* quicklz.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quicklz.h; sourceTree = "<group>"; };
+		0706FF212B8ED8D50086C9C3 /* quicklz.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = quicklz.c; sourceTree = "<group>"; };
 		070740F12987C4150053B0E8 /* OpenSDKDemoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenSDKDemoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		070740F42987C4150053B0E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		070740F52987C4150053B0E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -158,8 +160,8 @@
 		070740E82987C4150053B0E8 = {
 			isa = PBXGroup;
 			children = (
-				070105E32A9503B100F23C80 /* sleep_m_0310.b */,
-				070105E22A9503B100F23C80 /* sleep_m_0310.p */,
+				0706FEEC2B888D860086C9C3 /* dnn_240104_lstm1_sim.bin */,
+				0706FEED2B888D870086C9C3 /* dnn_240104_lstm1_sim.param */,
 				070740F32987C4150053B0E8 /* OpenSDKDemo */,
 				0707410F2987C4160053B0E8 /* OpenSDKTests */,
 				070741192987C4160053B0E8 /* OpenSDKUITests */,
@@ -264,6 +266,8 @@
 		07BC03D12991159700BDC703 /* flexPaster */ = {
 			isa = PBXGroup;
 			children = (
+				0706FF212B8ED8D50086C9C3 /* quicklz.c */,
+				0706FF202B8ED89C0086C9C3 /* quicklz.h */,
 				07EB3906299221B600792974 /* AFNetworking */,
 				076DE1EE29BC54A9006441F3 /* RNCryptor */,
 				07A2C94229B8742200A92FE6 /* BLEModel.h */,
@@ -403,9 +407,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				070741042987C4150053B0E8 /* LaunchScreen.storyboard in Resources */,
-				074F19A72AC06A6500677E49 /* sleep_m_0310.p in Resources */,
-				070105E52A9503B100F23C80 /* sleep_m_0310.b in Resources */,
 				070741012987C4150053B0E8 /* Assets.xcassets in Resources */,
+				0706FEEE2B888D870086C9C3 /* dnn_240104_lstm1_sim.bin in Resources */,
+				0706FEEF2B888D870086C9C3 /* dnn_240104_lstm1_sim.param in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,8 +440,8 @@
 				076DE1FA29BC54A9006441F3 /* RNDecryptor.m in Sources */,
 				076DE1F929BC54A9006441F3 /* RNCryptor.m in Sources */,
 				07EB3916299221B600792974 /* AFHTTPSessionManager.m in Sources */,
-				070105E42A9503B100F23C80 /* sleep_m_0310.p in Sources */,
 				07726E3C298CFA0F00E5664F /* MBProgressHUD.m in Sources */,
+				0706FF222B8ED8D50086C9C3 /* quicklz.c in Sources */,
 				07EB3918299221B600792974 /* AFURLRequestSerialization.m in Sources */,
 				07EB3915299221B600792974 /* AFURLResponseSerialization.m in Sources */,
 				076DE1FC29BC54A9006441F3 /* RNCryptorEngine.m in Sources */,
@@ -623,8 +627,7 @@
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "需要使用您的蓝牙以连接脑贴设备";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -658,8 +661,7 @@
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "需要使用您的蓝牙以连接脑贴设备";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

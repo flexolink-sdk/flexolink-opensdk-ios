@@ -32,7 +32,10 @@
 #define lookWaveAction    @"lookWaveAction"                 ///查看波形
 #define realIndexAction    @"realIndexAction"               ///实时指标
 #define startMeditation    @"startMeditation"               ///开始冥想
-#define closeMeditation    @"closeMeditation"                 ///结束冥想
+#define closeMeditation    @"closeMeditation"               ///结束冥想
+#define queryOfflineDataAction    @"queryOfflineDataAction" ///查询离线数据
+#define mergeOfflineDataAction    @"mergeOfflineDataAction" ///合并离线数据
+#define cancelOfflineDataAction  @"cancelOfflineDataAction" ///取消离线数据
 
 
 #define AppKey @""
@@ -42,17 +45,20 @@
 
 static NSString *cellId = @"cellId";
 
-@interface ViewController ()<ScanPasterDelegate, PasterConnectDelegate, RealTimeDataDelegate, PickDataDelegate, RecordDelegate, OnlineStageDelegate, MeditationDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ViewController ()<ScanPasterDelegate, PasterConnectDelegate, RealTimeDataDelegate, PickDataDelegate, RecordDelegate, OnlineStageDelegate, MeditationDelegate, UITableViewDelegate, UITableViewDataSource, OfflineDataDelegate>
 
 @property(nonatomic, strong) NSMutableArray<NSNumber *>* tempDataArray;
 @property(nonatomic, strong) NSMutableArray<ApiModel *>* items;
 
-@property(nonatomic, copy) NSString* binPath;
-@property(nonatomic, copy) NSString* paramPath;
-
 ///是否打开实时数据监听
 @property(nonatomic, assign) BOOL isOpenReal;
 
+///本地保存的 uuid，user，edfName， 例子中通过 userdefault，实际开发中，可以使用 数据库保存
+@property(nonatomic, copy) NSString* savedUID;
+@property(nonatomic, copy) NSString* savedUser;
+@property(nonatomic, copy) NSString* savedEdfName;///文件名 非文件路径
+
+@property(nonatomic, assign) BOOL hasOfflineData;
 @end
 
 @implementation ViewController
@@ -71,6 +77,9 @@ static NSString *cellId = @"cellId";
             [[ApiModel alloc] initWithShowTitle:@"设备电量" action:batteryAction],
             [[ApiModel alloc] initWithShowTitle:@"是否穿戴" action:isWearAction],
             [[ApiModel alloc] initWithShowTitle:@"滤波参数" action:filterParamAction],
+            [[ApiModel alloc] initWithShowTitle:@"查询离线数据" action:queryOfflineDataAction],
+            [[ApiModel alloc] initWithShowTitle:@"合并离线数据" action:mergeOfflineDataAction],
+            [[ApiModel alloc] initWithShowTitle:@"中止合并离线数据" action:cancelOfflineDataAction],
             [[ApiModel alloc] initWithShowTitle:@"开始记录" action:startRecordAction],
             [[ApiModel alloc] initWithShowTitle:@"停止记录" action:stopRecordAction],
             [[ApiModel alloc] initWithShowTitle:@"添加事件" action:addEventAction],
@@ -209,12 +218,10 @@ static NSString *cellId = @"cellId";
         UserInfoModel *model = [[UserInfoModel alloc] init];
         model.birthday = @"2023-02-03";
         model.sex = @"m";
-        model.name = @"海啸";
+        model.name = @"ABCDE";
         model.deviceName = @"Flex-BM05-500020";
     
-        NSString *edfName = [NSString stringWithFormat:@"%ld", [[NSDate now] timeIntervalSince1970]];
-    
-        [[FlexPasterSDK sharedInstance] startRecordWithEdfName:edfName userInfo:model recordDelegate:self];
+        [[FlexPasterSDK sharedInstance] startRecordWithUserInfo:model recordDelegate:self];
         
     }
     else  if ([action isEqualToString:stopRecordAction]) {
@@ -249,9 +256,8 @@ static NSString *cellId = @"cellId";
             return;
         }
         
-        ///下面这行代码是举例，将数据源和数据源长度传入，调用数据质量检测方法。
-        ///实际中，数据源大小由开发者自己定义，建议数据长度是10秒钟，即10 * 250 条数据。数据源请在实时数据回调函数 onRealTimeData 中保存
-        BOOL signalQuality = [[FlexPasterSDK sharedInstance] signalQualityWithData:self.tempDataArray dataLen:self.tempDataArray.count];
+        ///数据质量检测
+        BOOL signalQuality = [[FlexPasterSDK sharedInstance] signalQualityWithData];
         [MBProgressUtils showMsg:signalQuality ? @"数据质量好" : @"数据质量差" view:self.view];
         
     }
@@ -274,8 +280,7 @@ static NSString *cellId = @"cellId";
             return;
         }
         
-        [[FlexPasterSDK sharedInstance] onlineStage:self binPath:self.binPath paramPath:self.paramPath];
-        [MBProgressUtils showMsg:@"开启分期状态，请稍等30s左右" view:self.view];
+        [[FlexPasterSDK sharedInstance] onlineStage:self];
         
     }
     else if ([action isEqualToString:lookWaveAction]) {
@@ -312,7 +317,23 @@ static NSString *cellId = @"cellId";
     } else if ([action isEqualToString:closeMeditation]) {
         
         [[FlexPasterSDK sharedInstance] stopMeditation];
-    }
+    } else if ([action isEqualToString:queryOfflineDataAction]) {
+        if (!self.savedEdfName || !self.savedUID || !self.savedUser) {
+            [MBProgressUtils showMsg:@"本地未保存edf、uid、user 数据" view:self.view];
+            return;
+        }
+        [[FlexPasterSDK sharedInstance] queryOfflineDataWithEdf:self.savedEdfName user:self.savedUser uid:self.savedUID offlineDataDelegate:self];
+    } else if ([action isEqualToString:mergeOfflineDataAction]) {
+        
+        if (self.hasOfflineData) {
+            [[FlexPasterSDK sharedInstance] mergeOfflineData];
+        } else {
+            [MBProgressUtils showMsg:@"请先查询有无离线数据" view:self.view];
+        }
+    } else if ([action isEqualToString:cancelOfflineDataAction]) {
+        
+        [[FlexPasterSDK sharedInstance] cancelMergeOfflineData];
+    } 
 }
 
 - (void)viewDidLoad {
@@ -327,10 +348,6 @@ static NSString *cellId = @"cellId";
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
-    
-    ///配置模型路径
-    self.binPath = [[NSBundle mainBundle] pathForResource:@"sleep_m_0310" ofType:@"b"];
-    self.paramPath = [[NSBundle mainBundle] pathForResource:@"sleep_m_0310" ofType:@"p"];
     
     [[FlexPasterSDK sharedInstance] authorityWithAppKey:AppKey appSecret:AppSecret block:^(BOOL isSuccess, NSArray * _Nonnull apiList) {
         //返回已经授权的接口列表，具体的接口对应的名称，可以参考 FlexPasterSDK.h
@@ -351,6 +368,12 @@ static NSString *cellId = @"cellId";
         });
         
     }];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    self.savedUser = [userDefault valueForKey:@"savedUser"];
+    self.savedUID = [userDefault valueForKey:@"savedUID"];
+    self.savedEdfName = [userDefault valueForKey:@"savedEdfName"];
+    
 }
 
 - (BOOL) isConnected {
@@ -387,7 +410,7 @@ static NSString *cellId = @"cellId";
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RealIndexVC" object:eegData];
 }
 - (void) onRealTimeFilterData:(NSMutableArray<NSNumber *> *)eegData {
-//    NSLog(@"onRealTimeFilterData 接收到滤波数据")
+//    NSLog(@"onRealTimeFilterData 接收到滤波数据");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"eeg_filter_data" object:eegData];
     
 }
@@ -406,7 +429,10 @@ static NSString *cellId = @"cellId";
     [MBProgressUtils showMsg:@"结束记录...，edf存放在cache目录" view:self.view];
 }
 - (void) onStartRecordWithPath:(NSString *)edfPath {
-    [MBProgressUtils showMsg:@"开始记录..." view:self.view];
+    [MBProgressUtils showMsg:@"开始记录..." view:self.view];//202402591910_60b93a08_ABCDE.edf
+    NSLog(@"edf=%@", edfPath);
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setValue:edfPath forKey:@"savedEdfName"];
 }
 ///eegArray 脑电
 ///accelArray 加速度
@@ -426,6 +452,17 @@ static NSString *cellId = @"cellId";
     [MBProgressUtils showMsg:@"已添加事件" view:self.view];
 }
 
+- (void) onReturnUID:(NSString *)uid user:(nonnull NSString *)user edfName:(nonnull NSString *)edfName{
+    self.savedUID = uid;
+    self.savedUser = user;
+    self.savedEdfName = edfName;
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setValue:uid forKey:@"savedUID"];
+    [userDefault setValue:user forKey:@"savedUser"];
+    [userDefault setValue:edfName forKey:@"savedEdfName"];
+    [MBProgressUtils showMsg:@"开始记录" view:self.view];
+}
+
 #pragma mark OnlineStageDelegate
 - (void) onlineStage:(NSUInteger)stage {
     NSLog(@"分期结果：%ld", stage);
@@ -436,6 +473,25 @@ static NSString *cellId = @"cellId";
 - (void) onMeditationScore:(CGFloat)score {
     NSLog(@"===score=%.f", score);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"meditation_score" object:@(score)];
+}
+
+#pragma mark OfflineDataDelegate
+- (void) queryOfflineResultWithUid:(NSString *)uid {
+    ///uid 不为空代表存在离线数据
+    NSLog(@"uid=%@", uid);
+    self.hasOfflineData = [uid isEqualToString:self.savedUID];
+}
+///progress 合并进度
+///code :1000 正常 1001 失败 1002 取消 1003 设备断连
+- (void) mergeOfflineDataWithEdf:(NSString *)edfName progress:(float)progress step:(NSInteger)code {
+    NSLog(@"合并进度%f", progress);
+    if (progress == 100) {
+        self.hasOfflineData = NO;///合并完成，把标志位置为 NO
+    }
+    
+    if (code == 1003) {///设备断连，开发者可以在 UI 上提醒用户设备断连，需要重新连接设备后再次点击同步
+        NSLog(@"同步中设备断连");
+    }
 }
 @end
 
