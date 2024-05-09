@@ -32,8 +32,6 @@
 		07726E3F298CFA4F00E5664F /* MBProgressUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 07726E3E298CFA4F00E5664F /* MBProgressUtils.m */; };
 		07845E5829BB3961006AAEAB /* LookWaveVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 07845E5729BB3961006AAEAB /* LookWaveVC.m */; };
 		07845E5B29BB7BD5006AAEAB /* AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 07845E5A29BB7BD5006AAEAB /* AES.m */; };
-		07AB53ED2BA7E31F00F2AA8F /* 银河.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 07AB53EC2BA7E31F00F2AA8F /* 银河.mp3 */; };
-		07AB53F02BA7E35900F2AA8F /* AudioHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AB53EF2BA7E35900F2AA8F /* AudioHelper.m */; };
 		07BC03DD2991159700BDC703 /* libFlexPasterSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BC03D92991159700BDC703 /* libFlexPasterSDK.a */; };
 		07EB3915299221B600792974 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB390B299221B600792974 /* AFURLResponseSerialization.m */; };
 		07EB3916299221B600792974 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EB390C299221B600792974 /* AFHTTPSessionManager.m */; };
@@ -114,9 +112,6 @@
 		07A2C94229B8742200A92FE6 /* BLEModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEModel.h; sourceTree = "<group>"; };
 		07A2C94329B8742200A92FE6 /* PasterConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasterConstant.h; sourceTree = "<group>"; };
 		07A2C94429B8742200A92FE6 /* FlexPasterSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlexPasterSDK.h; sourceTree = "<group>"; };
-		07AB53EC2BA7E31F00F2AA8F /* 银河.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "银河.mp3"; sourceTree = "<group>"; };
-		07AB53EE2BA7E35900F2AA8F /* AudioHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioHelper.h; sourceTree = "<group>"; };
-		07AB53EF2BA7E35900F2AA8F /* AudioHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioHelper.m; sourceTree = "<group>"; };
 		07BC03D92991159700BDC703 /* libFlexPasterSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlexPasterSDK.a; sourceTree = "<group>"; };
 		07EB3907299221B600792974 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		07EB3908299221B600792974 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
@@ -165,7 +160,6 @@
 		070740E82987C4150053B0E8 = {
 			isa = PBXGroup;
 			children = (
-				07AB53EC2BA7E31F00F2AA8F /* 银河.mp3 */,
 				0706FEEC2B888D860086C9C3 /* dnn_240104_lstm1_sim.bin */,
 				0706FEED2B888D870086C9C3 /* dnn_240104_lstm1_sim.param */,
 				070740F32987C4150053B0E8 /* OpenSDKDemo */,
@@ -213,8 +207,6 @@
 				07845E5729BB3961006AAEAB /* LookWaveVC.m */,
 				075983572AB8433100D21BE0 /* RealIndexVC.h */,
 				075983582AB8433100D21BE0 /* RealIndexVC.m */,
-				07AB53EE2BA7E35900F2AA8F /* AudioHelper.h */,
-				07AB53EF2BA7E35900F2AA8F /* AudioHelper.m */,
 			);
 			path = OpenSDKDemo;
 			sourceTree = "<group>";
@@ -414,7 +406,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07AB53ED2BA7E31F00F2AA8F /* 银河.mp3 in Resources */,
 				070741042987C4150053B0E8 /* LaunchScreen.storyboard in Resources */,
 				070741012987C4150053B0E8 /* Assets.xcassets in Resources */,
 				0706FEEE2B888D870086C9C3 /* dnn_240104_lstm1_sim.bin in Resources */,
@@ -454,7 +445,6 @@
 				07EB3918299221B600792974 /* AFURLRequestSerialization.m in Sources */,
 				07EB3915299221B600792974 /* AFURLResponseSerialization.m in Sources */,
 				076DE1FC29BC54A9006441F3 /* RNCryptorEngine.m in Sources */,
-				07AB53F02BA7E35900F2AA8F /* AudioHelper.m in Sources */,
 				07EB3919299221B600792974 /* AFNetworkReachabilityManager.m in Sources */,
 				070741072987C4150053B0E8 /* main.m in Sources */,
 				07726E3F298CFA4F00E5664F /* MBProgressUtils.m in Sources */,

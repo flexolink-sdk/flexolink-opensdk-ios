@@ -48,8 +48,6 @@ NS_ASSUME_NONNULL_BEGIN
 ///数据截取
 - (void) pickupDataListener:(id<PickDataDelegate>) pickDataDelegate second:(NSUInteger) second;
 - (void) pickupDataBySecond:(NSUInteger) second;
-///计算体位
-- (NSInteger) calculatePosition;
 ///滤波参数
 - (void) filterParam:(NSUInteger) order hp:(NSInteger) hp lp:(NSInteger) lp;
 ///开始记录
