@@ -11,6 +11,7 @@
 #import "FlexPasterSDK.h"
 #import "LookWaveVC.h"
 #import "RealIndexVC.h"
+#import "AudioHelper.h"
 
 #define scanAction    @"scanBleDevice"                      ///扫描
 #define stopScanAction    @"stopScan"                       ///停止扫描
@@ -22,6 +23,7 @@
 #define rssiAction    @"getDeviceRssi"                      ///信号强度
 #define batteryAction    @"getBattery"                      ///设备电量
 #define isWearAction    @"isWearPatch"                      ///是否穿戴
+#define getPosition    @"getPosition"                       ///计算体位
 #define filterParamAction    @"setFilterParam"              ///滤波参数
 #define startRecordAction    @"startRecord"                 ///开始记录
 #define stopRecordAction    @"stopRecord"                   ///停止记录
@@ -38,8 +40,8 @@
 #define cancelOfflineDataAction  @"cancelOfflineDataAction" ///取消离线数据
 
 
-#define AppKey @""
-#define AppSecret @""
+#define AppKey @"rld77eb4ff82ee"
+#define AppSecret @"00f7d66c9aa4480d8bb73599d82a8d8e"
 
 #define equal(str1, str2) [str1 isEqualToString:str2]
 
@@ -59,6 +61,12 @@ static NSString *cellId = @"cellId";
 @property(nonatomic, copy) NSString* savedEdfName;///文件名 非文件路径
 
 @property(nonatomic, assign) BOOL hasOfflineData;
+
+@property(nonatomic, strong) UILabel* tempLabel;
+
+@property(nonatomic, assign) NSInteger disConnectedCnt;
+
+@property(nonatomic, strong) AudioHelper *audioHelper;
 @end
 
 @implementation ViewController
@@ -76,13 +84,14 @@ static NSString *cellId = @"cellId";
             [[ApiModel alloc] initWithShowTitle:@"信号强度" action:rssiAction],
             [[ApiModel alloc] initWithShowTitle:@"设备电量" action:batteryAction],
             [[ApiModel alloc] initWithShowTitle:@"是否穿戴" action:isWearAction],
+            [[ApiModel alloc] initWithShowTitle:@"计算体位" action:getPosition],
             [[ApiModel alloc] initWithShowTitle:@"滤波参数" action:filterParamAction],
             [[ApiModel alloc] initWithShowTitle:@"查询离线数据" action:queryOfflineDataAction],
             [[ApiModel alloc] initWithShowTitle:@"合并离线数据" action:mergeOfflineDataAction],
-            [[ApiModel alloc] initWithShowTitle:@"中止合并离线数据" action:cancelOfflineDataAction],
+            [[ApiModel alloc] initWithShowTitle:@"取消离线数据合并" action:cancelOfflineDataAction],
             [[ApiModel alloc] initWithShowTitle:@"开始记录" action:startRecordAction],
             [[ApiModel alloc] initWithShowTitle:@"停止记录" action:stopRecordAction],
-            [[ApiModel alloc] initWithShowTitle:@"添加事件" action:addEventAction],
+            [[ApiModel alloc] initWithShowTitle:@"睡眠记录中添加事件" action:addEventAction],
             [[ApiModel alloc] initWithShowTitle:@"信号质量" action:signalQualityAction],
 //            [[Model alloc] initWithShowTitle:@"设备信息" action:deviceInfoAction],
             [[ApiModel alloc] initWithShowTitle:@"分期状态" action:onlineStageAction],
@@ -203,6 +212,29 @@ static NSString *cellId = @"cellId";
         [MBProgressUtils showMsg:isWear ? @"设备已穿戴" : @"设备未穿戴" view:self.view];
         
     }
+    else  if ([action isEqualToString:getPosition]) {
+        
+        if (![self isConnected]) {
+            return;
+        }
+        
+        NSInteger position = [[FlexPasterSDK sharedInstance] calculatePosition];
+        NSString *posiText = @"未知";
+        if (position == 1) {
+            posiText = @"仰卧";
+        } else if (position == 2) {
+            posiText = @"左侧位";
+        } else if (position == 3) {
+            posiText = @"俯卧";
+        } else if (position == 4) {
+            posiText = @"右侧位";
+        } else if (position == 5) {
+            posiText = @"立位";
+        }
+        
+        [MBProgressUtils showMsg:[NSString stringWithFormat:@"体位：%@", posiText] view:self.view];
+        
+    }
     else  if ([action isEqualToString:filterParamAction]) {
         
         [[FlexPasterSDK sharedInstance] filterParam:4 hp:50 lp:5];
@@ -217,7 +249,7 @@ static NSString *cellId = @"cellId";
         
         UserInfoModel *model = [[UserInfoModel alloc] init];
         model.birthday = @"2023-02-03";
-        model.sex = @"m";
+        model.sex = @"M";//男性 M，女性 F
         model.name = @"ABCDE";
         model.deviceName = @"Flex-BM05-500020";
     
@@ -251,10 +283,11 @@ static NSString *cellId = @"cellId";
             return;
         }
         
-        if (!self.isOpenReal) {
-            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
-            return;
-        }
+//        if (!self.isOpenReal) {
+//            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
+//            return;
+//        }
+        [[FlexPasterSDK sharedInstance] realDataListener:self];
         
         ///数据质量检测
         BOOL signalQuality = [[FlexPasterSDK sharedInstance] signalQualityWithData];
@@ -289,10 +322,11 @@ static NSString *cellId = @"cellId";
             return;
         }
         
-        if (!self.isOpenReal) {
-            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
-            return;
-        }
+//        if (!self.isOpenReal) {
+//            [MBProgressUtils showMsg:@"请先打开实时数据监听" view:self.view];
+//            return;
+//        }
+        [[FlexPasterSDK sharedInstance] realDataListener:self];
         
         LookWaveVC *vc = [[LookWaveVC alloc] init];
         
@@ -331,8 +365,12 @@ static NSString *cellId = @"cellId";
             [MBProgressUtils showMsg:@"请先查询有无离线数据" view:self.view];
         }
     } else if ([action isEqualToString:cancelOfflineDataAction]) {
-        
-        [[FlexPasterSDK sharedInstance] cancelMergeOfflineData];
+        if (!self.hasOfflineData) {
+            [MBProgressUtils showMsg:@"请先查询有无离线数据" view:self.view];
+        } else {
+            [MBProgressUtils showMsg:@"正在取消离线数据合并" view:self.view];
+            [[FlexPasterSDK sharedInstance] cancelMergeOfflineData];
+        }
     } 
 }
 
@@ -343,11 +381,20 @@ static NSString *cellId = @"cellId";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.height - 90)];
+//    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, self.view.frame.size.width, self.view.frame.size.height - 90)];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 180, self.view.frame.size.width, self.view.frame.size.height - 190)];
     tableView.rowHeight = 50;
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
+    
+    UILabel *lab = [[UILabel alloc] init];
+    lab.frame = CGRectMake(0, 80, 300, 40);
+    lab.textColor = [UIColor blackColor];
+    lab.font = [UIFont systemFontOfSize:15];
+    lab.numberOfLines = 2;
+    self.tempLabel = lab;
+    [self.view addSubview:lab];
     
     [[FlexPasterSDK sharedInstance] authorityWithAppKey:AppKey appSecret:AppSecret block:^(BOOL isSuccess, NSArray * _Nonnull apiList) {
         //返回已经授权的接口列表，具体的接口对应的名称，可以参考 FlexPasterSDK.h
@@ -373,6 +420,23 @@ static NSString *cellId = @"cellId";
     self.savedUser = [userDefault valueForKey:@"savedUser"];
     self.savedUID = [userDefault valueForKey:@"savedUID"];
     self.savedEdfName = [userDefault valueForKey:@"savedEdfName"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(temp:) name:@"temp_noti" object:nil];
+    
+    ///播放音乐，加强保活
+//    self.audioHelper = [[AudioHelper alloc] init];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"银河" ofType:@"mp3"];
+//    [self.audioHelper playerWithFilePath:filePath];
+}
+
+- (void) temp:(NSNotification *) noti {
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"YYYY-MM-dd HH:mm:ss SSS";
+    NSString *timeStr = [formatter stringFromDate:[NSDate now]];
+    self.disConnectedCnt ++;
+    NSLog(@"断开时间：%@，断开次数：%ld", timeStr, self.disConnectedCnt);
+    self.tempLabel.text = [NSString stringWithFormat:@"断开时间：%@，断开次数：%ld", timeStr, self.disConnectedCnt];
     
 }
 
@@ -426,7 +490,7 @@ static NSString *cellId = @"cellId";
 
 #pragma mark RecordDelegate
 - (void) onStopRecord {
-    [MBProgressUtils showMsg:@"结束记录...，edf存放在cache目录" view:self.view];
+    [MBProgressUtils showMsg:[NSString stringWithFormat:@"结束记录，文件名%@", self.savedEdfName] view:self.view];
 }
 - (void) onStartRecordWithPath:(NSString *)edfPath {
     [MBProgressUtils showMsg:@"开始记录..." view:self.view];//202402591910_60b93a08_ABCDE.edf
@@ -480,6 +544,7 @@ static NSString *cellId = @"cellId";
     ///uid 不为空代表存在离线数据
     NSLog(@"uid=%@", uid);
     self.hasOfflineData = [uid isEqualToString:self.savedUID];
+    [MBProgressUtils showMsg:self.hasOfflineData ? @"有离线数据" : @"无离线数据" view:self.view];
 }
 ///progress 合并进度
 ///code :1000 正常 1001 失败 1002 取消 1003 设备断连
